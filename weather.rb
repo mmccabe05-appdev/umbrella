@@ -1,12 +1,14 @@
 require "open-uri"
 
+gmaps_key = ENV.fetch("GMAPS_KEY")
+dark_sky_key = ENV.fetch("DARK_SKY_KEY")
 p "Where are you located?"
 
  user_location = gets.chomp
 # user_location = "Memphis" #comment this out when ready to accept user input
 # p user_location
 
-gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=LOCATION&key=AIzaSyAgRzRHJZf-uoevSnYDTf08or8QFS_fb3U".gsub("LOCATION",user_location)
+gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=LOCATION&key=gmaps_key".gsub("LOCATION",user_location)
 
 #p gmaps_url
 
@@ -23,7 +25,7 @@ p "You are currently located at " + lattitude.to_s + ", " + longitude.to_s
 # p lattitude
 # # p raw_data.class
 
-darksky_url = "https://api.darksky.net/forecast/26f63e92c5006b5c493906e7953da893/REPLACELAT,REPLACELONG".gsub("REPLACELAT",lattitude.to_s).gsub("REPLACELONG",longitude.to_s)
+darksky_url = "https://api.darksky.net/forecast/DARK_SKY_KEY/REPLACELAT,REPLACELONG".gsub("REPLACELAT",lattitude.to_s).gsub("REPLACELONG",longitude.to_s)
 # p darksky_url
 
 raw_weather_data = URI.open(darksky_url).read
